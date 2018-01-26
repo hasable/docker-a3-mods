@@ -73,7 +73,7 @@ RUN wget -nv http://team-r3f.org/public/addons/R3F_UNITES_3.7.7z \
 WORKDIR /opt/arma3
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint", "/opt/arma3/arma3server"]
 CMD ["\"-config=conf/exile.cfg\"", \
-		"\"-servermod=@ExileServer;@AdminToolkitServer;@AdvancedRappelling;@AdvancedUrbanRappelling;@Enigma;@ExAd;@Revive\"", \
-		"\"-mod=@Exile;@CBA_A3\"", \
+		"\"-servermod=@ExileServer;@AdminToolkitServer;@AdvancedRappelling;@AdvancedUrbanRappelling;@Enigma;@ExAd\"", \
+		"\"-mod=@Exile;@CBA_A3;@CUPWeapons;@CUPUnits;@CUPVehicles;@R3FArmes;@R3FUnites\"", \
 		"-world=empty", \
 		"-autoinit"]
