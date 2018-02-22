@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+
+. /usr/local/bin/common
+. /usr/local/bin/google-download
+
+echo "Installing cup-weapons-1.10.0"
+pushd /tmp > /dev/null
+gdownload 0By04o_GxOry3eHppeUpoNTZ6SjQ https://drive.google.com/uc?export=download @CUP_Weapons-1.10.0.zip
+unzip @CUP_Weapons-1.10.0.zip && rm -f @CUP_Weapons-1.10.0.zip
+pushd @CUP_Weapons > /dev/null
+mv Keys/cup_weapons-1.10.0.bikey /opt/arma3/keys/cup_weapons-1.10.0.bikey
+rm -rf *.txt *.sha1 Keys
+find . -depth -exec rename 's/(.*)\/([^\/]*)/$1\/\L$2/' {} \;
+popd > /dev/null
+mv @CUP_Weapons /opt/arma3/@CUPWeapons
+popd

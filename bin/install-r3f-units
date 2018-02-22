@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+
+. /usr/local/bin/common
+
+echo "Installing r3f-units-3.7"
+pushd /tmp > /dev/null
+download http://team-r3f.org/public/addons/R3F_UNITES_3.7.7z R3F_UNITES_3.7.7z
+p7zip -d R3F_UNITES_3.7.7z
+pushd @R3F_UNITES > /dev/null
+rm -f *.pdf *.url 
+mv Server_Key/r3f.bikey /opt/arma3/keys/r3fu.bikey && rmdir Server_Key 
+find . -depth -exec rename 's/(.*)\/([^\/]*)/$1\/\L$2/' {} \; 
+popd  > /dev/null
+mv @R3F_UNITES /opt/arma3/@R3FUnites
+popd  > /dev/null

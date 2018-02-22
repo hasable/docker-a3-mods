@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+
+. /usr/local/bin/common
+. /usr/local/bin/google-download
+
+echo "Installing cup-units-1.10.0"
+pushd /tmp > /dev/null
+gdownload 0By04o_GxOry3cm5TVXV4LXhuLVE https://drive.google.com/uc?export=download @CUP_Units-1.10.0.zip
+unzip @CUP_Units-1.10.0.zip && rm -f @CUP_Units-1.10.0.zip
+pushd @CUP_Units > /dev/null
+mv Keys/cup_units-1.10.0.bikey /opt/arma3/keys/cup_units-1.10.0.bikey 
+rm -rf *.txt *.sha1 Keys 
+find . -depth -exec rename 's/(.*)\/([^\/]*)/$1\/\L$2/' {} \; 
+popd > /dev/null
+mv @CUP_Units /opt/arma3/@CUPUnits
+popd

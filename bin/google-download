@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -ex
+
+# download from google drive
+function gdownload {
+	local ggID=${1}
+	local ggURL=${2}
+	local cookie=/tmp/gcookie
+	local file=${3}
+
+	local cache=/tmp/cache
+	
+	if [ -r ${cache}/${file} -a -w ${cache}/${file} ]; then
+		echo "- file ${file} found in cache..."
+		mv ${cache}/${file} ${file}
+	else
+		curl -sc ${cookie} "${ggURL}&id=${ggID}" >/dev/null
+		ggCode="$(awk '/_warning_/ {print $NF}' ${cookie})"
+		cat ${cookie}
+		curl -LJb ${cookie} "${ggURL}&confirm=${ggCode}&id=${ggID}" -o ${file}
+		rm ${cookie}
+	fi
+}
