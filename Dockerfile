@@ -15,7 +15,13 @@ RUN apt-get update && apt-get install -y p7zip && apt-get clean
 
 # Provides commands & entrypoint
 COPY bin /usr/local/bin
-RUN chmod +x /usr/local/bin/google-download install-cup-weapons install-cup-units install-cup-vehicles install-r3f-units install-r3f-weapons
+RUN chmod +x \
+		/usr/local/bin/google-download \
+		/usr/local/bin/install-cup-weapons \
+		/usr/local/bin/install-cup-units \
+		/usr/local/bin/install-cup-vehicles \
+		/usr/local/bin/install-r3f-units \
+		/usr/local/bin/install-r3f-weapons
 
 ARG USER_NAME=steamu
 USER ${USER_NAME}
