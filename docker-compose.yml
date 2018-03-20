@@ -2,6 +2,8 @@ version: '2'
 services:
   arma-3-mods:
     image: "hasable/arma3-mods"
+    build:
+        context: .
     container_name: "arma-3-mods"
     depends_on: 
         - arma-3-exile-database
@@ -18,9 +20,10 @@ services:
       - EXILE_DATABASE_NAME=altisdb
       - EXILE_DATABASE_USER=altisu
       - EXILE_DATABASE_PASS=altispw
+      - EXILE_CONFIG_PASSWORD_RCON=password
       - ATK_CONFIG_ADMIN_LIST=76561197990024201,76561198007339024
-    volumes:
-      - /mnt/shares/logs:/opt/arma3/@ExileServer/extDB/logs/
+      - EXILE_CONFIG_RESTART_CYCLE=3600
+      - EXILE_CONFIG_RESTART_GRACE_TIME=1800
     links:
         - "arma-3-exile-database:database"
   arma-3-exile-database:
@@ -28,9 +31,8 @@ services:
     container_name: "arma-3-exile-database"
     volumes:
       - database-content:/var/lib/mysql
-      - /mnt/shares/mysql/logs:/var/log
     command: "--sql-mode=ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
 volumes:
     database-content:
         external:
-            name: database
+            name: exile-database-content
