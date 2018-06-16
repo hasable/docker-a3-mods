@@ -30,12 +30,7 @@ USER ${USER_NAME}
 WORKDIR /tmp
 
 # Install CUP Weapons
-RUN install-cup-weapons \
-	&& install-cup-units \
-	&& install-cup-vehicles \
-	&& install-r3f-units \
-	&& install-r3f-weapons \
-	&& install-trader-mod	
+RUN install-trader-mod	
 	
 WORKDIR /opt/arma3
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint", "/opt/arma3/arma3server"]
